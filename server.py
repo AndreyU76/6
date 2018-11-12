@@ -4,7 +4,7 @@ from typing import Any, Dict
 
 def handle_authenticate(request):
 
-    if request('user') == {'account_name': 'test', 'password': 'test'}:
+    if request['user'] == {'account_name': 'test', 'password': 'test'}:
 
         return{'response': 200}
 
