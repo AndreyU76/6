@@ -8,7 +8,7 @@ def handle_authenticate(request):
 
         return{'response': 200}
 
-    return{'response': 402, 'error': 'wrong password'}
+    return{'response': 403, 'error': 'wrong password'}
 
 mapping = {
     'authenticate': handle_authenticate
