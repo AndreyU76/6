@@ -9,6 +9,11 @@ def handle_authenticate(request):
         return{'response': 200}
 
     return{'response': 403, 'error': 'wrong password'}
+    
+    if request['user'] == {'account_name': 'test', 'password': 'test'}:
+        return{'response': 200}
+    return{'response': 401, 'error': 'wrong password'}
+
 
 mapping = {
     'authenticate': handle_authenticate
