@@ -1,5 +1,10 @@
 import unittest
 import serv
+
+def setUp(self):
+    pass
+def tearDown(self):
+
 class Testname(unittest.TestCase):
     def test_authenticate(self):
         self.assertEqual(request(account_name, test))
