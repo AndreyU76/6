@@ -4,6 +4,7 @@ import serv
 def setUp(self):
     pass
 def tearDown(self):
+    pass
 
 class Testname(unittest.TestCase):
     def test_authenticate(self):
