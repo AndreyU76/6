@@ -18,6 +18,6 @@ handlers = [
     logging.handlers.RotatingFileHandler('info.log', encoding='utf8',
         maxBytes=100000,
     logging.StreamHandler()
- handler = logging.handlers.TimedRotatingFileHandler(info,
+handlers = logging.handlers.TimedRotatingFileHandler(info,
                                                      when='D',
                                                      interval=1)
