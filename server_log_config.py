@@ -14,5 +14,5 @@ app_log = logging.getLogger('app')
 app_log.setLevel(logging.DEBUG)
 app_log.propagate = False
 app_log.addHandler(logging.FileHandler('info.log'))
-handlers = logging.handlers.RotatingFileHandler('info.log', encoding='utf8', maxBytes=100000, logging.StreamHandler()
+handlers = logging.handlers.RotatingFileHandler('info.log', encoding='utf8', maxBytes=100000, logging.StreamHandler())
 handlers = logging.handlers.TimedRotatingFileHandler(info, when='D', interval=1)
