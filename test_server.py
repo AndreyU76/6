@@ -1,16 +1,13 @@
 import unittest
+import json
 import serv
 
-def setUp(self):
-    pass
-def tearDown(self):
-    pass
 
-class Testname(unittest.TestCase):
-    def test_authenticate(self):
-        self.assertEqual(request(account_name, test))
-
-   
+class handle_authenticate(unittest.TestCase):
+    def test_dummy(self):
+        data_b = client.recv(1000000)
+        data = json.loads(data_b, encoding='utf-8')
+ 
 
 if __name__== "__main__":
     unittest.main()
