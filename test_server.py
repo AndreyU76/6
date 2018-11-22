@@ -3,7 +3,7 @@ import json
 import serv
 
 
-class handle_authenticate(unittest.TestCase):
+class test_handle_authenticate(unittest.TestCase):
     def test_dummy(self):
         data_b = client.recv(1000000)
         data = json.loads(data_b, encoding='utf-8')
