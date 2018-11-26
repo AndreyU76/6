@@ -19,42 +19,38 @@ def close_connection(con):
 
 # Пока есть хоть один сокет
 while sockets:
-    # Опрашиваем сокеты на готовность к чтению, записи, ошибки.
-    # С таймаутом в 1 секунду для того, чтобы программа реагировала
-    # на другие события.
+    
     readable, writable, exceptional = select.select(sockets, sockets, sockets, 1)
 
-    for s in readable: # Для каждого сокета готового к чтению
-        if s is server: # Если это сокет принимающий соединения
+    for s in readable: 
+        if s is server: 
             connection, client_address = s.accept()
-            connection.setblocking(0) # Этот клиентский сокет тоже будет неблокируемым
-            sockets.append(connection) # Добавляем клиентский сокет в список сокетов
-            message_queues[connection] = queue.Queue() # Создаём очередь сообщений для сокета
+            connection.setblocking(0) 
+            sockets.append(connection) 
+            message_queues[connection] = queue.Queue() 
         else:
             try:
-                data = s.recv(1024) # Читаем без блокировки
+                data = s.recv(1024) 
             except:
-                close_connection(s) # В случае ошибки закрываем этот сокет и удаляем
-            else: # Если ошибка не произошла
-                if data: # И данные получены
-                    for c in message_queues: # Обходим все очереди сообщений
-                        if c != s: # Кроме очереди текущего сокета
-                            message_queues[c].put(data) # Отправляем данные в каждую очередь
+                close_connection(s) 
+            else: 
+                if data:
+                    for c in message_queues: 
+                        if c != s: 
+                            message_queues[c].put(data) 
                 else:
-                    # Если данных нет в сокете готовом для чтения
-                    # значит он в состоянии закрытия на клиентской
-                    # стороне. Закрываем его на стороне сервера.
+                    
                     close_connection(s)
 
-    for s in writable: # Для каждого сокета готового к записи
+    for s in writable: 
         try:
-            next_msg = message_queues[s].get_nowait() # Получаем сообщение из очереди
+            next_msg = message_queues[s].get_nowait() 
         except queue.Empty:
-            pass # Игнорируем пустые очереди
+            pass 
         except KeyError:
-            pass # Игнорируем очереди удалённые до того, как до них дошла очередь обработки
+            pass 
         else:
-            s.send(next_msg) # Отправляем без блокировки
+            s.send(next_msg) 
 
-    for s in exceptional: # Для каждого сбойного сокета
-        close_connection(s) # Закрываем сбойный сокет
+    for s in exceptional: 
+        close_connection(s) 
