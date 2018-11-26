@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 import select
 import socket
 import queue
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.setblocking(0) # Неблокирующийся сокет
-server.bind(('localhost', 1080))
+server.setblocking(0)
+server.bind(('localhost', 7777))
 server.listen()
 
 sockets = [server]
