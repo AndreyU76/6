@@ -1,7 +1,7 @@
 import socket, select, time
 
 s = socket.socket()
-s.bind(("10.48.72.71", 8080))
+s.bind(("localhost", 7777))
 s.listen(10)
 
 connections = [s]
